@@ -1,5 +1,5 @@
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-   set fileencodings=ucs-bom,utf-8,latin1
+   set fileencodings=ucs-bom,utf-8,euc-jp,latin1
 endif
 
 set nocompatible    " Use Vim defaults (much better!)
