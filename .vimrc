@@ -150,7 +150,10 @@ endfunction
 "nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " FuzzyFinder
+let g:fuf_enumeratingLimit = 40
+let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
 nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
+nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
 
 syntax enable
 set background=dark
@@ -164,6 +167,12 @@ colorscheme Tomorrow-Night-Eighties
 "hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 "set cursorline
 "hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-
 let g:neocomplcache_enable_at_startup = 1
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
