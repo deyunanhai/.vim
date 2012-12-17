@@ -29,6 +29,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " NeoBundle 'Shougo/vimproc'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'thinca/vim-quickrun'
 
 " Only do this part when compiled with support for autocommands
@@ -169,10 +170,25 @@ colorscheme Tomorrow-Night-Eighties
 "hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 let g:neocomplcache_enable_at_startup = 1
 
+let g:neocomplcache_clang_use_library=1
+let g:neocomplcache_clang_library_path = '/usr/local/lib'
+let g:neocomplcache_clang_user_options =
+    \ '-I /usr/work/analysis/ '.
+    \ '-fms-extensions -fgnu-runtime '.
+    \ '-include malloc.h '
+let g:neocomplcache_max_list=1000
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" hilight the end space
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
 
