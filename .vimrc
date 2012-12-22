@@ -30,7 +30,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
-"NeoBundle 'Shougo/neocomplcache-clang'
+NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'thinca/vim-quickrun'
 
@@ -178,6 +178,7 @@ colorscheme Tomorrow-Night-Eighties
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
