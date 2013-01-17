@@ -31,6 +31,7 @@ NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'scrooloose/nerdtree'
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -170,12 +171,10 @@ colorscheme Tomorrow-Night-Eighties
 "hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 let g:neocomplcache_enable_at_startup = 1
 
-let g:neocomplcache_clang_use_library=1
-let g:neocomplcache_clang_library_path = '/usr/local/lib'
-let g:neocomplcache_clang_user_options =
-    \ '-I /usr/work/analysis/ '.
-    \ '-fms-extensions -fgnu-runtime '.
-    \ '-include malloc.h '
+"let g:neocomplcache_clang_use_library=1
+"let g:neocomplcache_clang_library_path = '/usr/lib/'
+let g:neocomplcache_clang_executable_path = '/usr/bin/clang'
+let g:neocomplcache_clang_auto_options = "path, .clang_complete, clang"
 let g:neocomplcache_max_list=1000
 
 " Enable omni completion.
