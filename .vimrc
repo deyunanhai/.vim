@@ -201,6 +201,8 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
+command! Rpspace :normal :%s/\s\+$// <CR><ESC>
+
 " hilight the end space
 augroup HighlightTrailingSpaces
   autocmd!
