@@ -155,7 +155,10 @@ endfunction
 
 " FuzzyFinder
 let g:fuf_enumeratingLimit = 40
-let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
+" let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn|node_modules'
+let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp|class|png|gif|jpg|jar)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
+let g:fuf_coveragefile_exclude = '\v\~$|\.(class|png|gif|jpg|jar|o|exe|dll|bak|orig|swp)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|classes|node_modules))($|[/\\])'
+let g:fuf_dir_exclude = '\v\~$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
 nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
 nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
 
