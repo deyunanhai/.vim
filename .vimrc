@@ -35,6 +35,9 @@ NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
 
+NeoBundle 'JavaScript-syntax'
+NeoBundle 'pangloss/vim-javascript'
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
   augroup redhat
@@ -212,4 +215,6 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
+
+nnoremap <expr> gr ':vimgrep ;\<' . expand('<cword>') . '\>; **/* \| cw'
 
