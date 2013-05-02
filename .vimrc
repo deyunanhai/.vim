@@ -38,6 +38,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 
+NeoBundle 'ack.vim'
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
   augroup redhat
@@ -216,5 +218,5 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-nnoremap <expr> gr ':vimgrep ;\<' . expand('<cword>') . '\>; **/* \| cw'
+nnoremap <expr> gr ':Ack ' . expand('<cword>') . ' -w --ignore-dir=node_modules \| cw'
 
