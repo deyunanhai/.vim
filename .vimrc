@@ -218,5 +218,5 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-nnoremap <expr> gr ':Ack ' . expand('<cword>') . ' -w --ignore-dir=node_modules \| cw'
+nnoremap <expr> gr ':Ack ' . ' -w --ignore-dir=node_modules ' . expand('<cword>')
 
