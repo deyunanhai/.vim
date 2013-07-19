@@ -37,6 +37,7 @@ NeoBundle 'scrooloose/nerdtree'
 
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'walm/jshint.vim'
 
 NeoBundle 'ack.vim'
 
