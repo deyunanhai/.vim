@@ -34,6 +34,7 @@ NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/vimshell'
 
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
