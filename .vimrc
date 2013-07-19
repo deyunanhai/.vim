@@ -26,7 +26,6 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 " NeoBundle 'Shougo/vimproc'
-" NeoBundle 'Shougo/vimproc'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
@@ -34,6 +33,7 @@ NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
 
 NeoBundle 'JavaScript-syntax'
