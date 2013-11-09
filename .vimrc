@@ -198,6 +198,13 @@ imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" 
 smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
+" zf create fold
+" zd delete fold
+" za toggle fold zA for recursive
+" zR open all flod
+" zfit for html
+nmap zh zfit
+
 " For snippet_complete marker.
 if has('conceal')
     set conceallevel=2 concealcursor=i
