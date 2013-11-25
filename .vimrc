@@ -47,7 +47,7 @@ NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'walm/jshint.vim'
 
-NeoBundle 'ack.vim'
+NeoBundle 'mileszs/ack.vim'
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -234,5 +234,5 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-nnoremap <expr> gr ':Ack ' . ' -w --ignore-dir=node_modules --ignore-dir=docs --ignore-dir=releases ' . expand('<cword>')
+nnoremap <expr> gr ':Ack!' . ' -w --ignore-dir=node_modules --ignore-dir=docs --ignore-dir=releases ' . expand('<cword>')
 
