@@ -238,3 +238,7 @@ augroup END
 " let $ACKRC=".ackrc"
 nnoremap <expr> gr ':Ack!' . ' -w --ignore-dir=node_modules --ignore-dir=docs --ignore-dir=releases ' . expand('<cword>')
 
+if filereadable(".vimrc") && fnamemodify('.', ':p:h') != fnamemodify('~', ':p:h')
+    source .vimrc
+endif
+
