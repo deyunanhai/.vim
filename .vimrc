@@ -204,8 +204,8 @@ imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>
 " zd delete fold
 " za toggle fold zA for recursive
 " zR open all flod
-" zfit for html
-nmap zh zfit
+" zfit or zfat for html
+nmap zh zfat
 
 " For snippet_complete marker.
 if has('conceal')
