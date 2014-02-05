@@ -29,10 +29,12 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'elzr/vim-json'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
@@ -238,7 +240,7 @@ augroup END
 " let $ACKRC=".ackrc"
 nnoremap <expr> gr ':Ack!' . ' -w --ignore-dir=node_modules --ignore-dir=docs --ignore-dir=releases ' . expand('<cword>')
 
-if filereadable(".vimrc") && fnamemodify('.', ':p:h') != fnamemodify('~', ':p:h')
+if filereadable(".vimrc") && fnamemodify('.', ':p:h') != fnamemodify('~', ':p:h') && fnamemodify('.', ':p:h') != fnamemodify('~/.vim', ':p:h')
     source .vimrc
 endif
 
