@@ -35,6 +35,7 @@ NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
