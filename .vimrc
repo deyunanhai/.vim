@@ -211,6 +211,15 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 " zfit or zfat for html
 nmap zh zfat
 
+" vim-multiple-cursors
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" add reg
+" let @c='yyp'
+
 " For snippet_complete marker.
 if has('conceal')
     set conceallevel=2 concealcursor=i
