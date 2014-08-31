@@ -218,7 +218,7 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " add reg
-" let @c='yyp'
+let @d='yyp'
 
 " For snippet_complete marker.
 if has('conceal')
