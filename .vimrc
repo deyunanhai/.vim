@@ -18,7 +18,7 @@ if has('vim_starting')
 
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 "NeoBundle 'Shougo/neobundle.vim'
@@ -51,6 +51,8 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'walm/jshint.vim'
 
 NeoBundle 'mileszs/ack.vim'
+
+call neobundle#end()
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
