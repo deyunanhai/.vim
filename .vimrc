@@ -226,6 +226,7 @@ let @d='yyp'
 if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
+autocmd Filetype json setl conceallevel=0
 
 let g:neocomplcache_enable_at_startup = 1
 
