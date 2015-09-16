@@ -256,6 +256,9 @@ augroup END
 " let $ACKRC=".ackrc"
 nnoremap <expr> gr ':Ack!' . ' -w --ignore-dir=node_modules --ignore-dir=docs --ignore-dir=releases ' . expand('<cword>')
 
+" search the select text
+vnoremap * "zy:let @/ = @z<CR>n
+
 if filereadable(".vimrc") && fnamemodify('.', ':p:h') != fnamemodify('~', ':p:h') && fnamemodify('.', ':p:h') != fnamemodify('~/.vim', ':p:h')
     source .vimrc
 endif
