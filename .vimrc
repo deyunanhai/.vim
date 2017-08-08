@@ -35,6 +35,7 @@ NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'fatih/vim-go'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -46,11 +47,19 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 NeoBundle 'Shougo/vimshell'
 
-NeoBundle 'JavaScript-syntax'
+"NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'walm/jshint.vim'
+NeoBundle 'mxw/vim-jsx'
+
+NeoBundle 'LeafCage/yankround.vim'
+
+NeoBundle 'vim-syntastic/syntastic'
+NeoBundle 'mtscout6/syntastic-local-eslint.vim'
 
 NeoBundle 'mileszs/ack.vim'
+
+NeoBundle 'derekwyatt/vim-scala'
 
 call neobundle#end()
 
@@ -219,6 +228,29 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" jsx
+let g:jsx_ext_required = 0
+
+let g:syntastic_javascript_checkers=['eslint']
+" ref. https://github.com/vim-syntastic/syntastic
+let g:syntastic_enable_signs = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+"LeafCage/yankround.vim
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-j> <Plug>(yankround-prev)
+nmap <C-k> <Plug>(yankround-next)
+let g:yankround_max_history = 35
+let g:yankround_dir = '~/.cache/yankround'
+
 " add reg
 let @d='yyp'
 
@@ -251,6 +283,9 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
+
+" let jinja template's syntax same as yaml
+autocmd BufReadPost *.jinja set syntax=yaml
 
 " use local ackrc
 " let $ACKRC=".ackrc"
