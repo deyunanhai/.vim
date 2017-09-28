@@ -29,6 +29,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/Denite.nvim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplcache-clang'
 "NeoBundle 'pekepeke/titanium-vim'
@@ -187,8 +188,52 @@ let g:fuf_enumeratingLimit = 40
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp|class|png|gif|jpg|jar)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
 let g:fuf_coveragefile_exclude = '\v\~$|\.(class|png|gif|jpg|jar|o|exe|dll|bak|orig|swp)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|classes|node_modules|vendor|data|logs))($|[/\\])'
 let g:fuf_dir_exclude = '\v\~$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
-nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
-nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
+" nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
+" nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
+
+" denite
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+nnoremap <silent> <C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+nnoremap <silent> <C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
+nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
+nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
+nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+nmap <silent> <C-u><C-f> :<C-u>Denite -resume<CR>
+nmap <silent> <C-u><C-r> :<C-u>Denite register<CR>
+nmap <silent> <C-u><C-m> :<C-u>Denite menu<CR>
+nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+
+call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', "<C-G>", '<denite:assign_next_matched_text>', 'noremap')
+call denite#custom#map('insert', "<C-T>", '<denite:assign_previous_matched_text>', 'noremap')
+call denite#custom#map('insert', "<C-T>", '<denite:assign_previous_matched_text>', 'noremap')
+call denite#custom#map('insert', "<S-CR>", '<denite:split>', 'noremap')
+
+" Add custom menus
+let s:menus = {}
+let s:menus.zsh = {
+            \ 'description': 'Edit your import zsh configuration'
+            \ }
+let s:menus.zsh.file_candidates = [
+            \ ['zshrc', '~/.zshrc'],
+            \ ['zshenv', '~/.zshenv'],
+            \ ]
+let s:menus.my_commands = {
+            \ 'description': 'Example commands'
+            \ }
+let s:menus.my_commands.command_candidates = [
+            \ ['Split the window', 'vnew'],
+            \ ['Open zsh menu', 'Denite menu:zsh'],
+            \ ]
+call denite#custom#var('menu', 'menus', s:menus)
+
 
 syntax enable
 set background=dark
