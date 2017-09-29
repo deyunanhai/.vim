@@ -47,6 +47,7 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/neoyank.vim'
 
 "NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
