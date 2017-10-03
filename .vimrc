@@ -196,19 +196,19 @@ let g:fuf_dir_exclude = '\v\~$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modul
 call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 nnoremap <silent> <C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
 nnoremap <silent> <C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
-nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
-nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
-nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
-nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-nmap <silent> <C-u><C-f> :<C-u>Denite -resume<CR>
-nmap <silent> <C-u><C-r> :<C-u>Denite register<CR>
-nmap <silent> <C-u><C-m> :<C-u>Denite menu<CR>
-nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
-nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
-nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+nmap <silent> <C-m><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-m><C-p> :<C-u>Denite file_rec<CR>
+nmap <silent> <C-m><C-j> :<C-u>Denite line<CR>
+nmap <silent> <C-m><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-m><C-]> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-m><C-u> :<C-u>Denite file_mru<CR>
+nmap <silent> <C-m><C-y> :<C-u>Denite neoyank<CR>
+nmap <silent> <C-m><C-f> :<C-u>Denite -resume<CR>
+nmap <silent> <C-m><C-r> :<C-u>Denite register<CR>
+nmap <silent> <C-m><C-m> :<C-u>Denite menu<CR>
+nmap <silent> <C-m>; :<C-u>Denite -resume -immediately -select=+1<CR>
+nmap <silent> <C-m>- :<C-u>Denite -resume -immediately -select=-1<CR>
+nmap <silent> <C-m><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
 
 call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>', 'noremap')
 call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>', 'noremap')
