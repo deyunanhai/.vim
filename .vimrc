@@ -62,6 +62,7 @@ NeoBundle 'mtscout6/syntastic-local-eslint.vim'
 NeoBundle 'mileszs/ack.vim'
 
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'vim-scripts/yaml.vim'
 
 call neobundle#end()
 
