@@ -56,13 +56,14 @@ NeoBundle 'mxw/vim-jsx'
 
 NeoBundle 'LeafCage/yankround.vim'
 
-NeoBundle 'vim-syntastic/syntastic'
-NeoBundle 'mtscout6/syntastic-local-eslint.vim'
+" NeoBundle 'vim-syntastic/syntastic'
+" NeoBundle 'mtscout6/syntastic-local-eslint.vim'
 
 NeoBundle 'mileszs/ack.vim'
 
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'vim-scripts/yaml.vim'
+NeoBundle 'w0rp/ale'
 
 call neobundle#end()
 
@@ -297,6 +298,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" let g:ale_echo_msg_format = '[%linter%] %s'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 "LeafCage/yankround.vim
 nmap p <Plug>(yankround-p)
