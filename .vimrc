@@ -27,6 +27,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 " NeoBundle 'Shougo/vimproc'
 NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'roxma/vim-hug-neovim-rpc'
+NeoBundle 'roxma/nvim-yarp'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/Denite.nvim'
@@ -191,16 +193,18 @@ let g:fuf_enumeratingLimit = 40
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp|class|png|gif|jpg|jar)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
 let g:fuf_coveragefile_exclude = '\v\~$|\.(class|png|gif|jpg|jar|o|exe|dll|bak|orig|swp)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|classes|node_modules|vendor|data|logs))($|[/\\])'
 let g:fuf_dir_exclude = '\v\~$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
-" nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
-" nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
+nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
+nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
 
 " denite
-call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-call denite#custom#source('file_rec', 'matchers', ['matcher_regexp', 'matcher_ignore_globs'])
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-	      \ [
-          \ '.git/', 'node_modules/',
-	      \   'images/', '*.min.*', 'img/', 'fonts/'])
+call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm'])
+call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
+            \ [ '.git/', '.ropeproject/', '__pycache__/', 'node_modules/',
+            \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+" Change sorters.
+" call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
 call denite#custom#var('grep', 'recursive_opts', [])
@@ -208,28 +212,44 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
-nnoremap <silent> <C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
-nnoremap <silent> <C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
+call denite#custom#kind('file', 'default_action', 'split')
+
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+endfunction
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+    "imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+endfunction
+
+" Change file/rec command.
+" nnoremap <silent> <C-p> :<C-u>Denite file/rec -start-filter=true<CR>
+" nnoremap <silent> <C-l> :<C-u>Denite line -start-filter=true<CR>
+nnoremap <silent> <C-m><C-p> :<C-u>Denite file/rec -start-filter=true<CR>
+nnoremap <silent> <C-m><C-l> :<C-u>Denite line -start-filter=true<CR>
 nmap <silent> <C-m><C-t> :<C-u>Denite filetype -highlight-mode-insert=Search<CR>
-nmap <silent> <C-m><C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
-nmap <silent> <C-m><C-j> :<C-u>Denite line -highlight-mode-insert=Search<CR>
 nmap <silent> <C-m><C-g> :<C-u>Denite grep -highlight-mode-insert=Search -mode=normal<CR>
 nmap <silent> <C-m><C-h> :<C-u>DeniteCursorWord grep -highlight-mode-insert=Search -mode=normal<CR>
-nmap <silent> <C-m><C-u> :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
-nmap <silent> <C-m><C-y> :<C-u>Denite neoyank -highlight-mode-insert=Search<CR>
+nmap <silent> <C-m><C-y> :<C-u>Denite neoyank<CR>
 nmap <silent> <C-m><C-f> :<C-u>Denite -resume<CR>
-nmap <silent> <C-m><C-r> :<C-u>Denite register -highlight-mode-insert=Search<CR>
+nmap <silent> <C-m><C-r> :<C-u>Denite register<CR>
 nmap <silent> <C-m><C-m> :<C-u>Denite menu<CR>
 nmap <silent> <C-m>; :<C-u>Denite -resume -immediately -select=+1<CR>
 nmap <silent> <C-m>- :<C-u>Denite -resume -immediately -select=-1<CR>
-nmap <silent> <C-m><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+nmap <silent> <C-m><C-d> :<C-u>call denite#start([{'name': 'file/rec', 'args': ['~/.vim']}])<CR>
 
-call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', "<C-G>", '<denite:assign_next_matched_text>', 'noremap')
-call denite#custom#map('insert', "<C-T>", '<denite:assign_previous_matched_text>', 'noremap')
-call denite#custom#map('insert', "<C-T>", '<denite:assign_previous_matched_text>', 'noremap')
-call denite#custom#map('insert', "<S-CR>", '<denite:split>', 'noremap')
+"call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+"call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
+"call denite#custom#map('insert', '<C-G>', '<denite:assign_next_matched_text>', 'noremap')
+"call denite#custom#map('insert', '<C-T>', '<denite:assign_previous_matched_text>', 'noremap')
+"call denite#custom#map('insert', '<C-T>', '<denite:assign_previous_matched_text>', 'noremap')
+"call denite#custom#map('insert', '<S-CR>', '<denite:split>', 'noremap')
 
 " Add custom menus
 let s:menus = {}
