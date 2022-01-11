@@ -27,11 +27,11 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 " NeoBundle 'Shougo/vimproc'
 NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'roxma/vim-hug-neovim-rpc'
-NeoBundle 'roxma/nvim-yarp'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/Denite.nvim'
+NeoBundle 'roxma/nvim-yarp'
+NeoBundle 'roxma/vim-hug-neovim-rpc'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplcache-clang'
 "NeoBundle 'pekepeke/titanium-vim'
@@ -53,8 +53,11 @@ NeoBundle 'Shougo/neoyank.vim'
 
 "NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'peitalin/vim-jsx-typescript'
 NeoBundle 'walm/jshint.vim'
 NeoBundle 'mxw/vim-jsx'
+NeoBundle 'prettier/vim-prettier'
 
 NeoBundle 'LeafCage/yankround.vim'
 
@@ -66,6 +69,8 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'vim-scripts/yaml.vim'
 NeoBundle 'w0rp/ale'
+
+" NeoBundle 'isRuslan/vim-es6'
 
 call neobundle#end()
 
@@ -198,13 +203,11 @@ nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
 
 " denite
 call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
-call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm'])
+call denite#custom#source('file/rec', 'matchers', ['matcher_regexp', 'matcher_ignore_globs'])
 call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
-            \ [ '.git/', '.ropeproject/', '__pycache__/', 'node_modules/',
-            \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-" Change sorters.
-" call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
+	      \ [
+          \ '.git/', 'node_modules/',
+	      \   'images/', '*.min.*', 'img/', 'fonts/'])
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
 call denite#custom#var('grep', 'recursive_opts', [])
@@ -212,28 +215,9 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
-call denite#custom#kind('file', 'default_action', 'split')
-
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-endfunction
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-    "imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
-endfunction
-
-" Change file/rec command.
-" nnoremap <silent> <C-p> :<C-u>Denite file/rec -start-filter=true<CR>
-" nnoremap <silent> <C-l> :<C-u>Denite line -start-filter=true<CR>
-nnoremap <silent> <C-m><C-p> :<C-u>Denite file/rec -start-filter=true<CR>
-nnoremap <silent> <C-m><C-l> :<C-u>Denite line -start-filter=true<CR>
-nmap <silent> <C-m><C-t> :<C-u>Denite filetype -highlight-mode-insert=Search<CR>
+nnoremap <silent> <C-m><C-p> :<C-u>Denite file/rec<CR>
+nnoremap <silent> <C-m><C-l> :<C-u>Denite line<CR>
+nmap <silent> <C-m><C-t> :<C-u>Denite filetype<CR>
 nmap <silent> <C-m><C-g> :<C-u>Denite grep -highlight-mode-insert=Search -mode=normal<CR>
 nmap <silent> <C-m><C-h> :<C-u>DeniteCursorWord grep -highlight-mode-insert=Search -mode=normal<CR>
 nmap <silent> <C-m><C-y> :<C-u>Denite neoyank<CR>
@@ -242,14 +226,23 @@ nmap <silent> <C-m><C-r> :<C-u>Denite register<CR>
 nmap <silent> <C-m><C-m> :<C-u>Denite menu<CR>
 nmap <silent> <C-m>; :<C-u>Denite -resume -immediately -select=+1<CR>
 nmap <silent> <C-m>- :<C-u>Denite -resume -immediately -select=-1<CR>
-nmap <silent> <C-m><C-d> :<C-u>call denite#start([{'name': 'file/rec', 'args': ['~/.vim']}])<CR>
+nmap <silent> <C-m><C-d> :<C-u>call denite#start([{'name': 'file/rec', 'args': ['~/dotfiles']}])<CR>
 
-"call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
-"call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
-"call denite#custom#map('insert', '<C-G>', '<denite:assign_next_matched_text>', 'noremap')
-"call denite#custom#map('insert', '<C-T>', '<denite:assign_previous_matched_text>', 'noremap')
-"call denite#custom#map('insert', '<C-T>', '<denite:assign_previous_matched_text>', 'noremap')
-"call denite#custom#map('insert', '<S-CR>', '<denite:split>', 'noremap')
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    "noremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+    "nnoremap <silent><buffer><expr> a denite#do_map('choose_action')
+    nnoremap <silent><buffer><expr> q denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select')
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+    imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+endfunction
 
 " Add custom menus
 let s:menus = {}
@@ -310,6 +303,14 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " jsx
 let g:jsx_ext_required = 0
+
+let g:ale_javascript_eslint_executable = 'eslint'
+let g:ale_javascript_eslint_options = ''
+let g:ale_javascript_eslint_suppress_eslintignore = 0
+let g:ale_javascript_eslint_use_global = 0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:syntastic_javascript_checkers=['eslint']
 " ref. https://github.com/vim-syntastic/syntastic
@@ -381,4 +382,7 @@ vnoremap * "zy:let @/ = @z<CR>n
 if filereadable(".vimrc") && fnamemodify('.', ':p:h') != fnamemodify('~', ':p:h') && fnamemodify('.', ':p:h') != fnamemodify('~/.vim', ':p:h')
     source .vimrc
 endif
+
+" disable preview window
+set completeopt-=preview
 
