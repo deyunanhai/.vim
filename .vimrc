@@ -218,8 +218,8 @@ call denite#custom#var('grep', 'final_opts', [])
 nnoremap <silent> <C-m><C-p> :<C-u>Denite file/rec -start-filter<CR>
 nnoremap <silent> <C-m><C-l> :<C-u>Denite line -start-filter<CR>
 nmap <silent> <C-m><C-t> :<C-u>Denite filetype<CR>
-nmap <silent> <C-m><C-g> :<C-u>Denite grep -highlight-mode-insert=Search -mode=normal<CR>
-nmap <silent> <C-m><C-h> :<C-u>DeniteCursorWord grep -highlight-mode-insert=Search -mode=normal<CR>
+nmap <silent> <C-m><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-m><C-h> :<C-u>DeniteCursorWord grep<CR>
 nmap <silent> <C-m><C-y> :<C-u>Denite neoyank<CR>
 nmap <silent> <C-m><C-f> :<C-u>Denite -resume<CR>
 nmap <silent> <C-m><C-r> :<C-u>Denite register<CR>
