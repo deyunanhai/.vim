@@ -12,6 +12,8 @@ endif
 "=============================================================================
 " GLOBAL FUNCTIONS {{{1
 
+let s:lastWindowId = 0
+
 
 " returns list of paths.
 " An argument for glob() is normalized in order to avoid a bug on Windows.
@@ -141,6 +143,7 @@ function fuf#openBuffer(bufNr, mode, reuse)
         \         l9#moveToBufferWindowInOtherTabpage(a:bufNr)))
     return
   endif
+  " echom printf('%sbuffer %d', a:bufNr)
   execute printf({
         \   s:OPEN_TYPE_CURRENT : '%sbuffer'          ,
         \   s:OPEN_TYPE_SPLIT   : '%ssbuffer'         ,
@@ -155,6 +158,8 @@ function fuf#openFile(path, mode, reuse)
   if bufNr > -1
     call fuf#openBuffer(bufNr, a:mode, a:reuse)
   else
+    " add by @bocelli for fix open file to correct window
+    call win_gotoid(s:lastWindowId)
     execute {
           \   s:OPEN_TYPE_CURRENT : 'edit '   ,
           \   s:OPEN_TYPE_SPLIT   : 'split '  ,
@@ -376,6 +381,8 @@ function fuf#launch(modeName, initialPattern, partialMatching)
     call fuf#setOneTimeVariables(
           \ ['&cmdheight', s:runningHandler.getPreviewHeight() + 1])
   endif
+  " add by @bocelli for store lastWindowId
+  let s:lastWindowId = win_getid()
   call l9#tempvariables#setList(s:TEMP_VARIABLES_GROUP, s:oneTimeVariables)
   let s:oneTimeVariables = []
   call s:activateFufBuffer()
