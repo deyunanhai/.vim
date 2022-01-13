@@ -202,7 +202,7 @@ nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
 nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
 
 " denite
-call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 call denite#custom#source('file/rec', 'matchers', ['matcher_regexp', 'matcher_ignore_globs'])
 call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
 	      \ [
@@ -352,6 +352,9 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_clang_executable_path = '/usr/bin/clang'
 let g:neocomplcache_clang_auto_options = "path, .clang_complete, clang"
 let g:neocomplcache_max_list=1000
+
+" show hidden files in NERDTree. use shift+i to hidden them
+let NERDTreeShowHidden=1
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
