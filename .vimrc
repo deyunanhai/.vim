@@ -312,6 +312,9 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
+" don't hiding double quotes symbols
+let g:vim_json_syntax_conceal = 0
+
 let g:syntastic_javascript_checkers=['eslint']
 " ref. https://github.com/vim-syntastic/syntastic
 let g:syntastic_enable_signs = 1
