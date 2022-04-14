@@ -69,6 +69,7 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'vim-scripts/yaml.vim'
 NeoBundle 'w0rp/ale'
+NeoBundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " NeoBundle 'isRuslan/vim-es6'
 
