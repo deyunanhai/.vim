@@ -199,8 +199,10 @@ let g:fuf_enumeratingLimit = 40
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|swp|class|png|gif|jpg|jar)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
 let g:fuf_coveragefile_exclude = '\v\~$|\.(class|png|gif|jpg|jar|o|exe|dll|bak|orig|swp)$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|classes|node_modules|vendor|data|logs))($|[/\\])'
 let g:fuf_dir_exclude = '\v\~$|(^|[/\\])(\.(hg|git|bzr|svn)|(bytecode|node_modules|classes|exports|gef.*|perspectives.*|gsr.*|jacf.*))($|[/\\])'
-nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
+" nnoremap <silent> <C-p> :<C-u>FufCoverageFile!<CR>
 nnoremap <silent> <C-l> :<C-u>FufLine!<CR>
+
+nnoremap <silent> <C-p> :<C-u>FZF<CR>
 
 " denite
 call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
