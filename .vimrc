@@ -70,6 +70,7 @@ NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'vim-scripts/yaml.vim'
 NeoBundle 'w0rp/ale'
 NeoBundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
+NeoBundle 'junegunn/fzf.vim'
 
 " NeoBundle 'isRuslan/vim-es6'
 
@@ -192,6 +193,11 @@ endfunction
 
 " clear search when press ecs twice
 "nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+" fzf
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 0, 'xoffset': 0 } }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " FuzzyFinder
 let g:fuf_enumeratingLimit = 40
