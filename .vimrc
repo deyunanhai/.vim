@@ -307,6 +307,14 @@ let g:multi_cursor_quit_key='<Esc>'
 " jsx
 let g:jsx_ext_required = 0
 
+let g:ale_linters = {
+            \   'javascript': ['stylelint', 'eslint'],
+            \   'jsx': ['stylelint', 'eslint'],
+            \   'json': ['spectral'],
+            \   'javascript.jsx': ['stylelint', 'eslint'],
+            \   'bash': ['sh'],
+            \}
+
 let g:ale_javascript_eslint_executable = 'eslint'
 let g:ale_javascript_eslint_options = ''
 let g:ale_javascript_eslint_suppress_eslintignore = 0
@@ -314,6 +322,7 @@ let g:ale_javascript_eslint_use_global = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
 
 " don't hiding double quotes symbols
 let g:vim_json_syntax_conceal = 0
