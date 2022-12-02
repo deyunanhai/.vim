@@ -2,7 +2,7 @@
 mkdir bundle
 cd bundle
 rm -rf neobundle.vim neocomplcache vim-powerline
-git clone git://github.com/Shougo/neobundle.vim.git
+git clone git@github.com:Shougo/neobundle.vim.git
 
 cd $HOME
 ln -s .vim/.vimrc
