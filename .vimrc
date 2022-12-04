@@ -18,6 +18,8 @@ if has('vim_starting')
 
 endif
 
+let $FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
@@ -317,6 +319,7 @@ let g:ale_linters = {
             \   'javascript': ['stylelint', 'eslint'],
             \   'jsx': ['stylelint', 'eslint'],
             \   'json': ['spectral'],
+            \   'graphql': [],
             \   'javascript.jsx': ['stylelint', 'eslint'],
             \   'bash': ['sh'],
             \}
@@ -398,7 +401,7 @@ autocmd BufReadPost *.jinja set syntax=yaml
 
 " use local ackrc
 " let $ACKRC=".ackrc"
-nnoremap <expr> gr ':Ack!' . ' -w --ignore-dir=node_modules --ignore-dir=docs --ignore-dir=releases --ignore-dir=data --ignore-dir=vendor --ignore-dir=logs ' . expand('<cword>')
+nnoremap <expr> gr ':Ack!' . ' -w --ignore-dir=node_modules --ignore-dir=.next --ignore-dir=releases --ignore-dir=data --ignore-dir=vendor --ignore-dir=logs ' . expand('<cword>')
 
 " search the select text
 vnoremap * "zy:let @/ = @z<CR>n
