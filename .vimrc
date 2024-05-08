@@ -73,6 +73,7 @@ NeoBundle 'vim-scripts/yaml.vim'
 NeoBundle 'w0rp/ale'
 NeoBundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
 NeoBundle 'junegunn/fzf.vim'
+NeoBundle 'vim-scripts/indentpython.vim'
 
 " NeoBundle 'isRuslan/vim-es6'
 
