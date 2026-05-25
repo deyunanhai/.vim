@@ -199,7 +199,7 @@ endfunction
 
 " fzf
 " https://github.com/junegunn/fzf/blob/master/README-VIM.md
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 0, 'xoffset': 0 } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'yoffset': 0, 'xoffset': 0 } }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " FuzzyFinder
